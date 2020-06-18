@@ -1,0 +1,60 @@
+#Load data
+Nd<-read.csv("C:\\Users\\SHASHANK\\Documents\\R\\WORK\\WC_AT.csv")
+
+
+getwd()
+view(Nd)
+
+# Visualization
+boxplot(Nd$Waist,col="dodgerblue4")
+boxplot(Nd$AT,col="dodgerblue4")
+
+#Regression equation
+#Syntax  model<-lm(y~x,data=data set name)
+#column names
+colnames(Nd)
+#Model building
+reg.model<- lm(AT~Waist,data =WC_AT)
+summary(reg.model)
+#Preparing new data frame with new data
+new_data=data.frame(Waist=c(70,80,95))
+
+#Predict for the new data
+waist_data=predict(reg.model,new_data)
+#Print predicted value
+waist_data
+
+#Predict for daily variable from the historical data
+pred<-predict(reg.model)
+#Print predicted values
+pred
+#Prepare a new data frame with pred and error
+finaldata<-data.frame(WC_AT,pred,"Error"= Nd$AT-pred)
+
+
+
+#Dotplots & Boxplots
+library("lattice")
+attach(WC_AT)
+boxplot(AT,col="dodgerblue4")
+boxplot(Waist,col="dodgerblue4")
+#Scatter Plot:
+plot(Waist,AT,main="Scatter Plot ", col="Dodgerblue4", col.main="Dodgerblue4", col.lab="Dodgerblue4", xlab="Waist Circulations", ylab="AT Circulations", pch=20)
+#Regression Model and its summary
+reg.model<-lm(AT~Waist,data = WC_AT)
+summary(reg.model)
+#Prediction Intervals for new observations:
+predict(reg.model,data.frame(Waist=c(40,75,200)))
+
+
+#Predict for the new data
+waist_data=predict(reg.model,new_data)
+#Print predicted value
+waist_data
+
+#Predict for daily variable from the historical data
+pred<-predict(reg.model)
+#Print predicted values
+pred
+#Prepare a new data frame with pred and error
+finaldata<-data.frame(WC_AT,pred,"Error"= Nd$AT-pred)

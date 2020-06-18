@@ -44,7 +44,7 @@ plot(Waist,AT,main="Scatter Plot ", col="Dodgerblue4", col.main="Dodgerblue4", c
 reg.model<-lm(AT~Waist,data = WC_AT)
 summary(reg.model)
 #Prediction Intervals for new observations:
-predict(reg.model,data.frame(Waist=c(40,75,200)))
+predict(reg.model,data.frame(Waist=c(70,75,90,95)))
 
 
 #Predict for the new data
